@@ -26,13 +26,13 @@ interface LoginProps {
 
 export function LoginScreen({ setup, onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin');
+  const [password, setPassword] = useState('d4n45egar');
   const [errorInput, setErrorInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === 'admin' && password === 'admin') {
+    if (username.trim() === 'admin' && password === 'd4n45egar') {
       setIsLoading(true);
       setErrorInput('');
       setTimeout(() => {
