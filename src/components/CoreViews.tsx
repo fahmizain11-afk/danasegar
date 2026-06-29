@@ -442,6 +442,8 @@ export function AnggotaView({ setup, members, simpanan, pinjaman, angsuran, onAd
             <tr>
               <th className="px-6 py-3.5">ID Anggota</th>
               <th className="px-6 py-3.5">Nama Lengkap</th>
+              <th className="px-6 py-3.5">Jenis Kelamin</th>
+              <th className="px-6 py-3.5">Alamat</th>
               <th className="px-6 py-3.5">No Handphone</th>
               <th className="px-6 py-3.5">Status</th>
               <th className="px-6 py-3.5">Total Simpanan</th>
@@ -451,7 +453,7 @@ export function AnggotaView({ setup, members, simpanan, pinjaman, angsuran, onAd
           <tbody className="divide-y divide-slate-100 dark:divide-slate-700 font-sans">
             {filteredMembers.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-12 text-center text-slate-400 italic">Belum ada anggota terdaftar dengan kriteria ini</td>
+                <td colSpan={8} className="px-6 py-12 text-center text-slate-400 italic">Belum ada anggota terdaftar dengan kriteria ini</td>
               </tr>
             ) : (
               filteredMembers.map((m) => {
@@ -476,8 +478,21 @@ export function AnggotaView({ setup, members, simpanan, pinjaman, angsuran, onAd
                             </span>
                           )}
                         </p>
-                        <p className="text-xs text-slate-400 max-w-[180px] truncate" title={m.alamat}>{m.alamat}</p>
                       </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`text-xs px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1 ${
+                        (m.jenisKelamin || 'Laki-laki') === 'Perempuan' 
+                          ? 'bg-rose-50 text-rose-700 border border-rose-100 dark:bg-rose-950/20 dark:text-rose-400 dark:border-rose-900/40' 
+                          : 'bg-sky-50 text-sky-700 border border-sky-100 dark:bg-sky-950/20 dark:text-sky-400 dark:border-sky-900/40'
+                      }`}>
+                        {m.jenisKelamin || 'Laki-laki'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-xs text-slate-600 dark:text-slate-350 max-w-[200px] truncate" title={m.alamat}>
+                        {m.alamat || '-'}
+                      </p>
                     </td>
                     <td className="px-6 py-4 font-mono text-xs">{m.noHp}</td>
                     <td className="px-6 py-4">
@@ -529,9 +544,9 @@ export function AnggotaView({ setup, members, simpanan, pinjaman, angsuran, onAd
                         )}
                         <button 
                           onClick={() => setEditingMember(m)}
-                          className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg dark:hover:bg-emerald-900/20 transition"
+                          className="px-2.5 py-1 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-900/20 dark:hover:bg-emerald-900/45 border border-emerald-150 dark:border-emerald-800 text-xs font-bold rounded-lg transition flex items-center gap-1 cursor-pointer"
                         >
-                          <Edit className="w-4 h-4"/>
+                          <Edit className="w-3.5 h-3.5"/> Edit
                         </button>
                         <button 
                           onClick={() => {

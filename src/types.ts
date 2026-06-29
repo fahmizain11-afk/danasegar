@@ -19,6 +19,11 @@ export interface KoperasiSetup {
   biayaProvisiPersen: number;
   jasaSimpananSukarelaPersen: number;
 
+  // Custom text content for Landing/Home page
+  kataPembuka?: string;
+  visi?: string;
+  misi?: string[];
+
   // Setup Awal Neraca (Initial Balance Sheet)
   kasAwal?: number;
   piutangAwal?: number;

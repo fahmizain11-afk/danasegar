@@ -52,7 +52,7 @@ export function PortalKoperasi({
   // Login Form States
   const [loginTab, setLoginTab] = useState<'admin' | 'member'>('member');
   const [adminUsername, setAdminUsername] = useState('admin');
-  const [adminPassword, setAdminPassword] = useState('admin');
+  const [adminPassword, setAdminPassword] = useState('d4n45egar');
   const [memberNo, setMemberNo] = useState('');
   const [memberPhone, setMemberPhone] = useState('');
   const [selectedMemberId, setSelectedMemberId] = useState('');
@@ -215,10 +215,10 @@ export function PortalKoperasi({
 
     setTimeout(() => {
       if (loginTab === 'admin') {
-        if (adminUsername.trim().toLowerCase() === 'admin' && adminPassword === 'admin') {
+        if (adminUsername.trim().toLowerCase() === 'admin' && adminPassword === 'd4n45egar') {
           onLoginSuccess('admin');
         } else {
-          setLoginError('Kredensial Pengurus salah. Gunakan Username: admin & Password: admin.');
+          setLoginError('Kredensial Pengurus salah. Gunakan Username: admin & Password: d4n45egar.');
         }
       } else {
         const cleanedPhone = memberPhone.replace(/[^0-9]/g, '');
@@ -403,8 +403,8 @@ export function PortalKoperasi({
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-50 tracking-tight leading-tight font-sans">
                     Solusi Keuangan Gotong Royong yang <span className="text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 rounded-lg">Amanah & Modern</span>
                   </h2>
-                  <p className="text-slate-550 dark:text-slate-350 text-sm leading-relaxed">
-                    Selamat datang di website resmi *{setup.namaKoperasi || "Koperasi Dana Segar"}*. Kami memadukan prinsip luhur kekeluargaan dengan teknologi digital terintegrasi untuk mendukung kesejahteraan seluruh anggota dan kemandirian usaha komunitas.
+                  <p className="text-slate-550 dark:text-slate-350 text-sm leading-relaxed whitespace-pre-line">
+                    {setup.kataPembuka || `Selamat datang di website resmi Koperasi ${setup.namaKoperasi || "Dana Segar"}. Kami memadukan prinsip luhur kekeluargaan dengan teknologi digital terintegrasi untuk mendukung kesejahteraan seluruh anggota dan kemandirian usaha komunitas.`}
                   </p>
                   
                   <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -598,8 +598,8 @@ export function PortalKoperasi({
                         <span className="w-1.5 h-6 bg-emerald-600 rounded" />
                         VISI UTAMA KOPERASI
                       </h4>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-3.5 italic">
-                        "Menjadi lembaga keuangan mikro koperasi terpercaya, mandiri, unggul dalam pelayanan, dan berorientasi penuh pada pemberdayaan potensi ekonomi seluruh anggota koperasi."
+                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-3.5 italic whitespace-pre-line">
+                        "{setup.visi || "Menjadi lembaga keuangan mikro koperasi terpercaya, mandiri, unggul dalam pelayanan, dan berorientasi penuh pada pemberdayaan potensi ekonomi seluruh anggota koperasi."}"
                       </p>
                     </div>
 
@@ -609,9 +609,17 @@ export function PortalKoperasi({
                         MISI KERJA KOPERASI
                       </h4>
                       <ul className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-3.5 space-y-2 list-decimal">
-                        <li>Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga terjangkau secara cepat dan transparan.</li>
-                        <li>Menumbuhkan budaya hemat melestarikan tabungan Warga SMKN 10 Garut guna memperkuat ketahanan modal internal.</li>
-                        <li>Menjunjung tinggi azas mufakat gotong royong, transparansi pelaporan, serta kepatuhan penuh terhadap undang-undang koperasi.</li>
+                        {setup.misi && setup.misi.length > 0 ? (
+                          setup.misi.map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))
+                        ) : (
+                          <>
+                            <li>Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga ringan secara cepat dan transparan.</li>
+                            <li>Menumbuhkan budaya hemat melestarikan tabungan masyarakat guna memperkuat ketahanan modal internal.</li>
+                            <li>Menjunjung tinggi azas mufakat gotong royong, transparansi pelaporan, serta kepatuhan penuh terhadap undang-undang koperasi.</li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </div>

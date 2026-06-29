@@ -26,13 +26,13 @@ interface LoginProps {
 
 export function LoginScreen({ setup, onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('d4n45egar');
+  const [password, setPassword] = useState('admin');
   const [errorInput, setErrorInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === 'admin' && password === 'd4n45egar') {
+    if (username.trim() === 'admin' && password === 'admin') {
       setIsLoading(true);
       setErrorInput('');
       setTimeout(() => {
@@ -483,6 +483,15 @@ export function ProfilKoperasiView({ setup, onUpdateSetup, onResetData, onSyncFr
   const [alamatKop, setAlamatKop] = useState(setup.alamatKantor);
   const [logoKop, setLogoKop] = useState(setup.logoUrl);
   const [noBadanHukum, setNoBadanHukum] = useState(setup.noBadanHukum || "AHU-00123.AH.01.2026");
+
+  // Custom text contents states
+  const [kataPembuka, setKataPembuka] = useState(setup.kataPembuka || "Selamat datang di website resmi Koperasi Dana Segar. Kami memadukan prinsip luhur kekeluargaan dengan teknologi digital terintegrasi untuk mendukung kesejahteraan seluruh anggota dan kemandirian usaha komunitas.");
+  const [visi, setVisi] = useState(setup.visi || "Menjadi lembaga keuangan mikro koperasi terpercaya, mandiri, unggul dalam pelayanan, dan berorientasi penuh pada pemberdayaan potensi ekonomi seluruh anggota koperasi.");
+  const [misiRaw, setMisiRaw] = useState((setup.misi || [
+    "Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga ringan secara cepat dan transparan.",
+    "Menumbuhkan budaya hemat melestarikan tabungan masyarakat guna memperkuat ketahanan modal internal.",
+    "Menjunjung tinggi azas mufakat gotong royong, transparansi pelaporan, serta kepatuhan penuh terhadap undang-undang koperasi."
+  ]).join('\n'));
   
   // New config fields
   const [jenisBungaPinjaman, setJenisBungaPinjaman] = useState<'flat' | 'menurun'>(setup.jenisBungaPinjaman || 'flat');
@@ -603,7 +612,10 @@ export function ProfilKoperasiView({ setup, onUpdateSetup, onResetData, onSyncFr
       simpananWajibAwal: parseFloat(simpananWajibAwal as any) || 0,
       simpananSukarelaAwal: parseFloat(simpananSukarelaAwal as any) || 0,
       modalAwal: parseFloat(modalAwalForm as any) || 0,
-      danaCadanganAwal: parseFloat(danaCadanganAwal as any) || 0
+      danaCadanganAwal: parseFloat(danaCadanganAwal as any) || 0,
+      kataPembuka: kataPembuka,
+      visi: visi,
+      misi: misiRaw.split('\n').map(line => line.trim()).filter(line => line.length > 0)
     });
     setSavedNotif(true);
     setTimeout(() => setSavedNotif(false), 3000);
@@ -874,6 +886,58 @@ export function ProfilKoperasiView({ setup, onUpdateSetup, onResetData, onSyncFr
               onChange={(e) => setAlamatKop(e.target.value)}
               required
             />
+          </div>
+
+          {/* PERSONALISASI TEKS HOMEPAGE */}
+          <div className="border-t border-slate-150 dark:border-slate-700 pt-5 mt-4 space-y-4">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600"/> 
+              Kustomisasi Konten Beranda / Landing Page
+            </h4>
+            <p className="text-xs text-slate-500">
+              Ubah kata sambutan pembuka dan visi misi koperasi yang ditampilkan di halaman depan portal anggota.
+            </p>
+
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 label-id">KATA SAMBUTAN / PEMBUKA BERANDA</label>
+                <textarea 
+                  rows={3}
+                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-900 border rounded-lg text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-700 focus:outline-none"
+                  value={kataPembuka}
+                  onChange={(e) => setKataPembuka(e.target.value)}
+                  placeholder="Masukkan kalimat sambutan pembuka untuk beranda koperasi..."
+                  required
+                />
+                <p className="text-[10px] text-slate-400">Kata sambutan hangat yang muncul di bagian banner atas beranda.</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 label-id">VISI KOPERASI</label>
+                <textarea 
+                  rows={2}
+                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-900 border rounded-lg text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-700 focus:outline-none"
+                  value={visi}
+                  onChange={(e) => setVisi(e.target.value)}
+                  placeholder="Tuliskan visi utama koperasi..."
+                  required
+                />
+                <p className="text-[10px] text-slate-400">Visi luhur jangka panjang koperasi.</p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-500 dark:text-slate-400 label-id">MISI KOPERASI (SATU MISI PER BARIS)</label>
+                <textarea 
+                  rows={4}
+                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-900 border rounded-lg text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-700 focus:outline-none font-sans"
+                  value={misiRaw}
+                  onChange={(e) => setMisiRaw(e.target.value)}
+                  placeholder="Contoh:&#10;Memberikan pelayanan prima di bidang tabungan.&#10;Menumbuhkan budaya hemat di masyarakat.&#10;Menjunjung tinggi gotong royong."
+                  required
+                />
+                <p className="text-[10px] text-slate-400">Tekan Enter untuk memisahkan setiap misi koperasi agar tampil sebagai poin-poin daftar otomatis.</p>
+              </div>
+            </div>
           </div>
 
           {/* SETUP PARAMETER FINANCIAL DAN KOPERASI */}

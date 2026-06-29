@@ -19,7 +19,16 @@ export const initialSetup: KoperasiSetup = {
   simpananWajibAwal: 0,
   simpananSukarelaAwal: 0,
   modalAwal: 0,
-  danaCadanganAwal: 0
+  danaCadanganAwal: 0,
+
+  // Default custom text values
+  kataPembuka: "Selamat datang di website resmi Koperasi Dana Segar. Kami memadukan prinsip luhur kekeluargaan dengan teknologi digital terintegrasi untuk mendukung kesejahteraan seluruh anggota dan kemandirian usaha komunitas.",
+  visi: "Menjadi lembaga keuangan mikro koperasi terpercaya, mandiri, unggul dalam pelayanan, dan berorientasi penuh pada pemberdayaan potensi ekonomi seluruh anggota koperasi.",
+  misi: [
+    "Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga ringan secara cepat dan transparan.",
+    "Menumbuhkan budaya hemat melestarikan tabungan masyarakat guna memperkuat ketahanan modal internal.",
+    "Menjunjung tinggi azas mufakat gotong royong, transparansi pelaporan, serta kepatuhan penuh terhadap undang-undang koperasi."
+  ]
 };
 
 export const initialMembers: Member[] = [];
