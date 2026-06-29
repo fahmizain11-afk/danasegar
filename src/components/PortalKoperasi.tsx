@@ -609,8 +609,8 @@ export function PortalKoperasi({
                         MISI KERJA KOPERASI
                       </h4>
                       <ul className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed pl-3.5 space-y-2 list-decimal">
-                        <li>Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga ringan secara cepat dan transparan.</li>
-                        <li>Menumbuhkan budaya hemat melestarikan tabungan masyarakat guna memperkuat ketahanan modal internal.</li>
+                        <li>Memberikan pelayanan prima di bidang tabungan berkeadilan serta kredit berbunga terjangkau secara cepat dan transparan.</li>
+                        <li>Menumbuhkan budaya hemat melestarikan tabungan Warga SMKN 10 Garut guna memperkuat ketahanan modal internal.</li>
                         <li>Menjunjung tinggi azas mufakat gotong royong, transparansi pelaporan, serta kepatuhan penuh terhadap undang-undang koperasi.</li>
                       </ul>
                     </div>
